@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "../../../utils/axios";
 import noimage from "/noimage.png";
+
 const Topnav = () => {
   const [query, setQuery] = useState("");
   const [searches, setsearches] = useState([]);
+
   const getsearches = async () => {
     try {
       const { data } = await axios.get(`/search/multi?query=${query}`);
@@ -17,9 +19,10 @@ const Topnav = () => {
   useEffect(() => {
     getsearches();
   }, [query]);
+
   return (
-    <div className="w-full h-[10vh] relative flex justify-start items-center ml-[15%]">
-      <i classname="text-3xl text-zinc-400 ri-search-line"></i>
+    <div className="w-[80%] h-[10vh] mx-auto relative flex items-center">
+      <i className="text-3xl text-zinc-400 ri-search-line"></i>
       <input
         onChange={(e) => setQuery(e.target.value)}
         value={query}
@@ -30,11 +33,11 @@ const Topnav = () => {
       {query.length > 0 && (
         <i
           onClick={() => setQuery("")}
-          classname="text-zinc-400 text-3xl ri-close-fill"
+          className=" text-zinc-400 text-3xl ri-close-fill right-0"
         ></i>
       )}
 
-      <div className="absolute w-[50%] max-h-[50vh] bg-zinc-200 top-[90%] overflow-auto">
+      <div className="absolute w-[50%] max-h-[55vh] bg-zinc-200 top-[100%] left-[6%] overflow-auto">
         {searches.map((s, i) => (
           <Link
             key={i}
@@ -56,10 +59,6 @@ const Topnav = () => {
             </span>
           </Link>
         ))}
-        {/* <Link className="font-semibold text-zinc-600 w-[100%] p-10 flex justify-start hover:bg-zinc-300 items-center duration-300 border-b-2 border-zinc-100 hover:text-black">
-          <img src="" alt="" />
-          <span>Hello Everyone</span>
-        </Link> */}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 const Loading = () => {
   return (
-    <section className="fixed inset-0 flex justify-center items-center bg-[#1F1E24] bg-opacity-50">
-      <div className="border-t-4 border-blue-500 border-solid w-16 h-16 rounded-full animate-spin"></div>
+    <section className="bg-opacity-50 fixed inset-0 flex items-center justify-center bg-[#1F1E24]">
+      <div className="h-16 w-16 animate-spin rounded-full border-t-4 border-solid border-blue-500"></div>
     </section>
   );
 };

@@ -49,17 +49,16 @@ const People = () => {
   }, [category]);
 
   return person.length > 0 ? (
-    <div className="w-screen h-screen ">
-      <div className="px-[5%] w-full flex items-center justify-between">
+    <div className="h-screen w-screen">
+      <div className="flex w-full items-center justify-between px-[5%]">
         <h1 className="text-2xl font-semibold text-zinc-400">
           <i
             onClick={() => navigate(-1)}
-            className="hover:text-[#6556cd] ri-arrow-left-line mr-[5%]"
+            className="ri-arrow-left-line mr-[5%] hover:text-[#6556cd]"
           ></i>
           People
-          
         </h1>
-        <div className="flex items-center w-[80%]">
+        <div className="flex w-[80%] items-center">
           <Topnav />
           <div className="w-[2%]"></div>
         </div>

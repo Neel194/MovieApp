@@ -4,26 +4,26 @@ import axios from "../../utils/axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from "./Loading";
 import Cards from "./templates/Cards";
-import Dropdown from "./templates/Dropdown";
 import Topnav from "./templates/Topnav";
 
-const Popular = () => {
-  document.title = "CineVerse | Popular";
+const People = () => {
+  document.title = "CineVerse | person Shows";
   const navigate = useNavigate();
-  const [category, setcategory] = useState("movie");
-  const [popular, setpopular] = useState([]);
+  const [category, setcategory] = useState("popular");
+  const [person, setperson] = useState([]);
   const [page, setpage] = useState(1);
   const [hasMore, sethasMore] = useState(true);
-  const GetPopular = async () => {
+
+  const GetPerson = async () => {
     try {
-      const { data } = await axios.get(`/${category}/popular?page=${page}`);
+      const { data } = await axios.get(`/person/${category}?page=${page}`);
       if (data.results && data.results.length > 0) {
-        setpopular((prevstate) => [...prevstate, ...data.results]);
+        setperson((prevstate) => [...prevstate, ...data.results]);
         setpage(page + 1);
       } else {
         sethasMore(false);
       }
-      // setpopular(data.results);
+      // setperson(data.results);
     } catch (error) {
       console.log("Error: ", error);
       sethasMore(false);
@@ -31,15 +31,15 @@ const Popular = () => {
   };
 
   const refreshHandler = () => {
-    if (popular.length === 0) {
+    if (person.length === 0) {
       setpage(1);
       sethasMore(true);
-      GetPopular();
+      GetPerson();
     } else {
       setpage(1);
-      setpopular([]);
+      setperson([]);
       sethasMore(true);
-      GetPopular();
+      GetPerson();
     }
   };
 
@@ -48,7 +48,7 @@ const Popular = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
-  return popular.length > 0 ? (
+  return person.length > 0 ? (
     <div className="w-screen h-screen ">
       <div className="px-[5%] w-full flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-zinc-400">
@@ -56,30 +56,26 @@ const Popular = () => {
             onClick={() => navigate(-1)}
             className="hover:text-[#6556cd] ri-arrow-left-line mr-[5%]"
           ></i>
-          Popular
+          People
+          
         </h1>
         <div className="flex items-center w-[80%]">
           <Topnav />
-          <Dropdown
-            title="Category"
-            options={["tv", "movie"]}
-            func={(e) => setcategory(e.target.value)}
-          />
           <div className="w-[2%]"></div>
         </div>
       </div>
 
       <InfiniteScroll
-        dataLength={popular.length}
-        next={GetPopular}
+        dataLength={person.length}
+        next={GetPerson}
         hasMore={hasMore}
         loader={<h1>Loading...</h1>}
       >
-        <Cards data={popular} title={category} />
+        <Cards data={person} title={category} />
       </InfiniteScroll>
     </div>
   ) : (
     <Loading />
   );
 };
-export default Popular;
+export default People;

@@ -17,7 +17,7 @@ const Movie = () => {
   const GetMovie = async () => {
     try {
       const { data } = await axios.get(`/movie/${category}?page=${page}`);
-      if (data.results.length > 0) {
+      if (data.results && data.results.length > 0) {
         setmovie((prevstate) => [...prevstate, ...data.results]);
         setpage(page + 1);
       } else {
@@ -26,21 +26,26 @@ const Movie = () => {
       // setmovie(data.results);
     } catch (error) {
       console.log("Error: ", error);
+      sethasMore(false);
     }
   };
 
   const refreshHandler = () => {
     if (movie.length === 0) {
+      setpage(1);
+      sethasMore(true);
       GetMovie();
     } else {
       setpage(1);
       setmovie([]);
+      sethasMore(true);
       GetMovie();
     }
   };
 
   useEffect(() => {
     refreshHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
   return movie.length > 0 ? (

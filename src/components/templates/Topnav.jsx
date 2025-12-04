@@ -8,16 +8,22 @@ const Topnav = () => {
   const [searches, setsearches] = useState([]);
 
   const getsearches = async () => {
+    if (!query.trim()) {
+      setsearches([]);
+      return;
+    }
     try {
       const { data } = await axios.get(`/search/multi?query=${query}`);
-      setsearches(data.results);
+      setsearches(data.results || []);
     } catch (error) {
       console.log("Error: ", error);
+      setsearches([]);
     }
   };
 
   useEffect(() => {
     getsearches();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return (
@@ -37,8 +43,9 @@ const Topnav = () => {
         ></i>
       )}
 
-      <div className="absolute w-[50%] max-h-[55vh] bg-zinc-200 top-[100%] left-[6%] overflow-auto">
-        {searches.map((s, i) => (
+      {query.length > 0 && searches.length > 0 && (
+        <div className="absolute w-[50%] max-h-[55vh] bg-zinc-200 top-[100%] left-[6%] overflow-auto">
+          {searches.map((s, i) => (
           <Link
             key={i}
             className="font-semibold text-zinc-600 w-[100%] p-10 flex justify-start hover:bg-zinc-300 items-center duration-300 border-b-2 border-zinc-100 hover:text-black"
@@ -59,7 +66,8 @@ const Topnav = () => {
             </span>
           </Link>
         ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

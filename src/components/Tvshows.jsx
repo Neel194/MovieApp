@@ -18,7 +18,7 @@ const Tvshows = () => {
   const GetTv = async () => {
     try {
       const { data } = await axios.get(`/tv/${category}?page=${page}`);
-      if (data.results.length > 0) {
+      if (data.results && data.results.length > 0) {
         settv((prevstate) => [...prevstate, ...data.results]);
         setpage(page + 1);
       } else {
@@ -27,21 +27,26 @@ const Tvshows = () => {
       // settv(data.results);
     } catch (error) {
       console.log("Error: ", error);
+      sethasMore(false);
     }
   };
 
   const refreshHandler = () => {
     if (tv.length === 0) {
+      setpage(1);
+      sethasMore(true);
       GetTv();
     } else {
       setpage(1);
       settv([]);
+      sethasMore(true);
       GetTv();
     }
   };
 
   useEffect(() => {
     refreshHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
   return tv.length > 0 ? (

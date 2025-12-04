@@ -1,6 +1,6 @@
 const HorizontalCards = ({ data }) => {
     return (
-        <div className="w-[100%] flex overflow-y-hidden mb-5 p-5">
+        <div className="w-full flex overflow-y-hidden mb-5 p-5">
             {data.map((d, i) => (
                 <div
                     key={i}
@@ -23,7 +23,7 @@ const HorizontalCards = ({ data }) => {
                         </h1>
                         <p className="">
                             {d.overview
-                                ? d.overview.slice(0, 40) + '...'
+                                ? d.overview.slice(0, 35) + '...'
                                 : 'No overview available'}
                             {d.overview && (
                                 <span className="text-zinc-500">more</span>

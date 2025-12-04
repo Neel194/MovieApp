@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
-import { sidebarTopLinks } from '../../../utils/data/sidebarLinks';
+import {
+    sidebarTopLinks,
+    sidebarDownLinks,
+} from '../../../utils/data/sidebarLinks';
 
 const Sidenav = () => {
     return (
@@ -33,13 +36,18 @@ const Sidenav = () => {
                 <h1 className="text-white font-semibold text-xl mt-5 mb-2">
                     Website Information
                 </h1>
-                <Link className="hover:bg-[#6556CD] hover:text-white rounded-lg duration-300 p-4">
-                    <i className="mr-2 ri-information-2-fill"></i> About
-                    CineVerse
-                </Link>
-                <Link className="hover:bg-[#6556CD] hover:text-white rounded-lg duration-300 p-4">
-                    <i className="mr-2 ri-phone-fill"></i> Contact us
-                </Link>
+                {sidebarDownLinks.map((item) => {
+                    return (
+                        <Link
+                            key={item.to}
+                            to={item.to}
+                            className="hover:bg-[#6556CD] hover:text-white rounded-lg duration-300 p-4"
+                        >
+                            <i className={`${item.icon} mr-2`}></i>
+                            {item.label}
+                        </Link>
+                    );
+                })}
             </nav>
         </div>
     );

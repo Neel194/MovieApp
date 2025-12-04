@@ -4,6 +4,19 @@ export interface SidebarLink {
     icon: string;
 }
 
+export const sidebarDownLinks: SidebarLink[] = [
+    {
+        to: '/about',
+        label: 'About CineVerse',
+        icon: 'ri-information-2-fill',
+    },
+    {
+        to: '/contact',
+        label: 'Contact Us',
+        icon: 'ri-phone-fill',
+    },
+];
+
 export const sidebarTopLinks: SidebarLink[] = [
     {
         to: '/trending',

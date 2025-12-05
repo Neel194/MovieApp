@@ -5,7 +5,11 @@ const Cards = ({ data, title }) => {
   return (
     <div className="mt-[1%] flex h-full w-full flex-wrap bg-[#1F1E24] px-[4%]">
       {data.map((c, i) => (
-        <Link className="relative mr-[6%] mb-[3%] w-[27vh]" key={i}>
+        <Link
+          to={`/${c.media_type || title}/details/${c.id}`}
+          className="relative mr-[6%] mb-[3%] w-[27vh]"
+          key={i}
+        >
           <img
             className="h-[40vh] object-cover shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)]"
             src={

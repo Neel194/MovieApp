@@ -20,7 +20,14 @@ const Header = ({ data }) => {
         {data.overview
           ? data.overview.slice(0, 200) + "..."
           : "No overview available"}
-        {data.overview && <Link className="text-blue-400">more</Link>}
+        {data.overview && (
+          <Link
+            to={`/${data.media_type}/details/${data.id}`}
+            className="text-blue-400"
+          >
+            more
+          </Link>
+        )}
       </p>
       <p className="text-white">
         <i className="ri-megaphone-fill text-yellow-500"></i>{" "}

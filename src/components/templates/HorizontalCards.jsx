@@ -1,8 +1,14 @@
+import { Link } from "react-router-dom";
+
 const HorizontalCards = ({ data }) => {
   return (
     <div className="mb-5 flex w-full overflow-y-hidden p-5">
       {data.map((d, i) => (
-        <div key={i} className="mr-5 mb-5 h-[37vh] min-w-[15%] bg-zinc-900">
+        <Link
+          to={`/${d.media_type}/details/${d.id}`}
+          key={i}
+          className="mr-5 mb-5 h-[37vh] min-w-[15%] bg-zinc-900"
+        >
           <img
             className="h-[55%] w-full object-cover"
             src={`https://image.tmdb.org/t/p/original${
@@ -22,7 +28,7 @@ const HorizontalCards = ({ data }) => {
               {d.overview && <span className="text-zinc-500">more</span>}
             </p>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
